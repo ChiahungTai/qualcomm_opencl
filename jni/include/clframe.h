@@ -169,7 +169,7 @@ public:
 		a = m_pframe[pos + 3];
 	};
 	inline void fill_color(char r, char g, char b, char a) {
-		int x, y;
+		size_t x, y;
 		for(y = 0; y < m_height; y++) {
 			for(x = 0; x < m_width; x++) {
 				set_pixel(x, y, r, g, b, a);
@@ -178,7 +178,7 @@ public:
 	};
 	inline void add_color(char r, char g, char b, char a) {
 		pixel_cl pix;
-		int x, y;
+		size_t x, y;
 		for(y = 0; y < m_height; y++) {
 			for(x = 0; x < m_width; x++) {
 				get_pixel(x, y, pix);
@@ -196,7 +196,7 @@ public:
 			m_ptmp = new unsigned char[len];
 		int bottom = (m_height/2);
 		int top = (m_height/2) + 1;
-		for(int ndx = 0; ndx < m_height/2; ndx++) {
+		for(size_t ndx = 0; ndx < m_height/2; ndx++) {
 			memcpy(m_ptmp, m_pframe + (bottom * len), len);
 			memcpy(m_pframe + (bottom * len), m_pframe + (top * len), len);
 			memcpy(m_pframe + (top * len), m_ptmp, len);
@@ -242,3 +242,4 @@ public:
 
 
 #endif //_CLFRAME_H
+

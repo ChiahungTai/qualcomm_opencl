@@ -125,3 +125,4 @@ public:
 
 // cloperation
 #endif //_CLOPERATION_H
+

@@ -28,16 +28,19 @@ public:
 		close();
 	};
 	void close() {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		lastError = clReleaseContext(context);
 		set_close();
 	};
 	void open(ClPlatform &platform) {
-		if(is_open())
+		if(is_open()) {
 			return;
-		if(!platform.is_open())
+		}
+		if(!platform.is_open()) {
 			return;
+		}
 
 		device_id = platform.get();
 		context = clCreateContext(NULL, 1, &device_id, NULL, NULL, &lastError);
@@ -55,21 +58,25 @@ public:
 	};
 #ifndef _NVIDIA
 	void getEvent(cl_event &evt) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		evt = clCreateUserEvent(context, &lastError);
-		if(CL_SUCCESS != lastError)
+		if(CL_SUCCESS != lastError) {
 			TRACE("lastError = %d\n", lastError);
+		}
 	};
 #endif //_NVIDIA
 	cl_sampler createSampler(cl_bool normalized_coords, cl_addressing_mode addressing_mode
 			, cl_filter_mode filter_mode) {
 		cl_sampler ret = clCreateSampler(context, normalized_coords, addressing_mode, filter_mode, &lastError);
-		if(CL_SUCCESS != lastError)
+		if(CL_SUCCESS != lastError) {
 			TRACE("lastError = %d\n", lastError);
+		}
 		return ret;
 	};
 };
 
 
 #endif // _CLCONTEXT_H
+

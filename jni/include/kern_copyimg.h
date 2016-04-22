@@ -61,3 +61,4 @@ public:
 
 // copyimg
 #endif //_COPYIMG_H
+

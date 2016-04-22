@@ -247,7 +247,7 @@ public:
 			m_sdl.draw_circle(m_target.get_x(), m_target.get_y(), m_target.get_r(), 0, 0, 255);
 		}
 	}
-	void crop_pixels(int x, int y, unsigned char *img, size_t origin[3], size_t region[3]) {
+	void crop_pixels(size_t x, size_t y, unsigned char *img, size_t origin[3], size_t region[3]) {
 		if(m_crop) {
 			if((x < origin[0]) || (x > (region[0] + origin[0])))
 				return;
@@ -460,3 +460,4 @@ public:
 };
 
 #endif // _CLVIDEO_H
+

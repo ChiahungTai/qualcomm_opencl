@@ -13,9 +13,9 @@
 class ClTarget {
 private:
 protected:
-	int m_x;
-	int m_y;
-	int m_r;
+	size_t m_x;
+	size_t m_y;
+	size_t m_r;
 	size_t m_width;
 	size_t m_height;
 	bool m_enabled;
@@ -48,7 +48,7 @@ public:
 	bool set(ClPosition &postion) {
 		return set(postion.m_x, postion.m_y, postion.m_z);
 	}
-	bool set(int x, int y, int r) {
+	bool set(size_t x, size_t y, size_t r) {
 		if(x > (m_width - r))
 			return false;
 		if(x < r)

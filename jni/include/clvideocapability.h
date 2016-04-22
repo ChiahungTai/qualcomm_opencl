@@ -108,7 +108,7 @@ public:
 	void close() {
 		if(is_open() == false)
 			return;
-		int i = 0;
+		unsigned int i = 0;
 		for (i = 0; i < n_buffers; ++i)
 			if(-1 == munmap(buffers[i].start, buffers[i].length))
 				return;
@@ -144,7 +144,7 @@ public:
 		}
 		return true;
 	};
-	bool queue_buffers(int buf_count) {
+	bool queue_buffers(unsigned int buf_count) {
 		unsigned int i;
 		TRACE("index = %d\n", buf_count);
 		for (i = 0; i < buf_count; ++i) {

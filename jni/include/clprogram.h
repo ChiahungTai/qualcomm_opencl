@@ -60,19 +60,23 @@ public:
 		program_name = 0;
 	};
 	void close() {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		lastError = clReleaseProgram(program);
-		if(source_str) 
+		if(source_str) {
 			free(source_str);
+		}
 		clear();
 		TRACE("lastError = %d\n", set_close());
 	};
 	void open(ClContext &context, const char *source_str) {
-		if(is_open())
+		if(is_open()) {
 			return;
-		if(!context.is_open())
+		}
+		if(!context.is_open()) {
 			return;
+		}
 		//TRACE("source_str = %s\n", source_str);	
 		PERF_START("clCreateProgramWithSource");
 		/* Create Kernel Program from the source */
@@ -82,10 +86,12 @@ public:
 		TRACE("lastError = %d\n", set_open());
 	};
 	bool build(ClPlatform &platform) {
-		if(!is_open())
+		if(!is_open()) {
 			return false;
-		if(!platform.is_open())
+		}
+		if(!platform.is_open()) {
 			return false;
+		}
 
 #ifdef _FREESCALE
 		const char *options = " -D_FREESCALE";
@@ -95,6 +101,10 @@ public:
 		const char *options = " -D_INTEL -cl-mad-enable";
 #endif //_FREESCALE
 
+#ifdef _QUALCOMM
+		const char *options = " -D_QUALCOMM -cl-mad-enable";
+#endif //_FREESCALE
+
 		void *user_data = NULL;
 		cl_device_id device_id = platform.get();
 
@@ -102,10 +112,12 @@ public:
 		lastError = clBuildProgram(program, 1, &device_id, options, NULL, user_data);
 		PERF_END("clBuildProgram");
 
-		if(CL_SUCCESS != lastError)
+		if(CL_SUCCESS != lastError) {
 			TRACE("lastError = %d\n", lastError);
-		if(lastError == CL_SUCCESS)
+		}
+		if(lastError == CL_SUCCESS) {
 			return true;
+		}
 
 		char buildLog[16384];
 		clGetProgramBuildInfo(program, device_id, CL_PROGRAM_BUILD_LOG,
@@ -118,3 +130,4 @@ public:
 	};
 };
 #endif // _CLPROGRAM_H
+

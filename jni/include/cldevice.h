@@ -85,32 +85,38 @@ public:
 		mapBuffer.clear();
 	}
 	void arg(ClBuffer &buffer) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		mapBuffer[m_index] = &buffer;
 		m_index = kernel->arg(buffer, m_index);
 	};
 	void arg(unsigned int &buffer) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		m_index = kernel->arg(buffer, m_index);
 	};
 	void arg(float &buffer) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		m_index = kernel->arg(buffer, m_index);
 	};
 	void write(int index, const void *istr) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		
 		ClBuffer *buffer = mapBuffer[index];
-		if(buffer->is_buffer() == false)
+		if(buffer->is_buffer() == false) {
 			return;
+		}
 		m_context->command_queue->write(*buffer, istr, buffer->length());
 	};
 	void pin(int index, void *str) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		ClBuffer *buffer = mapBuffer[index];
 		void *ptr = m_context->command_queue->pin(*buffer, buffer->length());
 		if(ptr == NULL) {
@@ -120,8 +126,9 @@ public:
 		memcpy(ptr, str, buffer->length());
 	};
 	void read(int index, void *ostr) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}	
 		ClBuffer *buffer = mapBuffer[index];
 		m_context->command_queue->read(*buffer, ostr, buffer->length());
 	};
@@ -131,11 +138,13 @@ public:
 	}
 	void read(int index, unsigned char *ret_img, const size_t *origin
 			, const size_t *region) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		ClBuffer *buffer = mapBuffer[index];
-		if(buffer->is_image() == false)
+		if(buffer->is_image() == false) {
 			return;
+		}
 
 		PERF_START("clEnqueueReadImage");
 		lastError = clEnqueueReadImage(m_context->command_queue->get(), buffer->get(), CL_TRUE
@@ -143,17 +152,20 @@ public:
 				, 0, NULL, NULL);
 		PERF_END("clEnqueueReadImage");
 
-		if(CL_SUCCESS != lastError)
+		if(CL_SUCCESS != lastError) {
 			TRACE("lastError = %d\n", lastError);
+		}
 	};
 	inline void run() {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		m_context->command_queue->enqueueKernel(*kernel);
 	};
 	void run(int dimCount, const size_t *global, const size_t *local) {
-		if(!is_open())
+		if(!is_open()) {
 			return;
+		}
 		//size_t Xlocal = getWorkGroupInfo();
 		PERF_START(program->name());
 		m_context->command_queue->enqueueKernel(*kernel, dimCount, global, local);
@@ -216,10 +228,12 @@ public:
 		cl_mem img = clCreateImage2D(m_context->context->get(), flags
 				, &format, width, height, 0, buffer, &lastError);
 #endif //_WITH_IMAGEDESC
-		if(CL_SUCCESS != lastError)
+		if(CL_SUCCESS != lastError) {
 			TRACE("lastError = %d\n", lastError);
+		}
 		return img;
 	};
 };
 
 #endif // _CLDEVICE_H
+

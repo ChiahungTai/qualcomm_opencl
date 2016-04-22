@@ -141,3 +141,4 @@ public:
 	}
 };
 #endif // _CLBUFFER_H
+

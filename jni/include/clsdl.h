@@ -260,7 +260,7 @@ public:
 		int ox = origin[0];
 		int len = region[1] * 4;
 		//x = ox;
-		for(int oy = origin[1]; oy < (origin[1] + region[1]); oy++) {
+		for(size_t oy = origin[1]; oy < (origin[1] + region[1]); oy++) {
 			//TRACE("(%d,%d) - (%d,%d) (%zu,%zu)\n", ox, oy, x, y, region[0], region[1]);
 			memcpy(get(ox, oy), frame.at(x, y), len);
 			y++;
@@ -270,3 +270,4 @@ public:
 
 
 #endif //_CLSDL_H
+

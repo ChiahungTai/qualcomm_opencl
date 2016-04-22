@@ -5,10 +5,10 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 #for opencl.h
-LOCAL_C_INCLUDES := $(ADRENO_SDK)/Development/Inc
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/include
+LOCAL_C_INCLUDES := $(ADRENO_SDK)/Development/Inc/
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/
 #LOCAL_CPPFLAGS += -I$(ADRENO_SDK)/Development/Inc
-LOCAL_CFLAGS := -DUSE_GPU -c -g -O0  -W 
+LOCAL_CFLAGS := -DUSE_GPU -c -g -O0  -W  -std=c++11 -D_QUALCOMM
 #LOCAL_LDLIBS := -llog -landroid $(LOCAL_PATH)/libs/libOpenCL.so
 LOCAL_LDLIBS := -llog -landroid -lOpenCL
 LOCAL_MODULE := ocl_videoproc

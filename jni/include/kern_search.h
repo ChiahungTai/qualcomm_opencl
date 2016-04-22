@@ -27,10 +27,10 @@ protected:
 	size_t m_height;
 	char *m_pos;
 	int m_counter;
-	int y_top;
-	int y_bottom;
-	int x_left;
-	int x_right;
+	size_t y_top;
+	size_t y_bottom;
+	size_t x_left;
+	size_t x_right;
 public:
 	ClOpSearch() {
 		m_pos = 0;
@@ -59,9 +59,9 @@ public:
 	}
 protected:
 	void search(ClPosition &postion) {
-		int z = 15;
-		for(int y = z*2; y < m_height; y++) {
-			for(int x = z*2; x < m_width; x++) {
+		size_t z = 15;
+		for(size_t y = z*2; y < m_height; y++) {
+			for(size_t x = z*2; x < m_width; x++) {
 				if(m_pos[(y * m_width) + x] > 0) {
 					postion.set(x, y, z);
 					return;
@@ -70,16 +70,16 @@ protected:
 		}
 	};
 	void find_edges(ClPosition &postion) {
-		int z = 15;
-		int a, b;
+		size_t z = 15;
+		size_t a, b;
 		bool found = false;
 		x_right = 0;
 		y_bottom = 0;
 
 		x_left = m_width;
 		y_top = m_height;
-		for(int y = z*2; y < m_height; y++) {
-			for(int x = z*2; x < m_width; x++) {
+		for(size_t y = z*2; y < m_height; y++) {
+			for(size_t x = z*2; x < m_width; x++) {
 				if(m_pos[(y * m_width) + x] > 0) {
 					if(x < x_left) // find left edge
 						x_left = x;
@@ -229,3 +229,4 @@ protected:
 
 // kern_search
 #endif //_KERN_SEARCH_H
+

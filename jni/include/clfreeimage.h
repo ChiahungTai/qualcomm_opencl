@@ -210,3 +210,4 @@ public:
 	}
 };
 #endif // _CLFREEIMAGE_H
+

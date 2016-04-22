@@ -100,3 +100,4 @@ public:
 
 // clscreeninfo
 #endif //_CLSCREENINFO_H
+

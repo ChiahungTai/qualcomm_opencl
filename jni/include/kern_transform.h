@@ -38,8 +38,9 @@ public:
 	void clear_last(ClFrame &in_frame) {
 		if(!is_open())
 			return;
-		if(is_clear == true)
+		if(is_clear == true) {
 			return;
+		}
 		is_clear = true;
 		last_frame.framecopy(in_frame);
 	}
@@ -96,3 +97,4 @@ public:
 
 // transform
 #endif //_TRANSFORM_H
+

@@ -37,8 +37,9 @@ public:
 	};
 	bool proc(ClFrame &in_frame, ClFrame &out_frame, float *m_fmx) {
 		if(!is_open()) {
-			if(open("./yuv2rgb.cl", "convert") == false)
+			if(open("./yuv2rgb.cl", "convert") == false) {
 				return false;
+			}
 			m_width = in_frame.width();
 			m_height = in_frame.height();
 		}
@@ -77,3 +78,4 @@ public:
 
 // clyuv2rgb
 #endif //_CLYUV2RGB_H
+

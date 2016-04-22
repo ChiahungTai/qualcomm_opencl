@@ -39,8 +39,9 @@ public:
 		klock lock(m_ulock); // I forgot why i put this here
 
 #ifdef _DEBUG
-		if(os.is_set())
+		if(os.is_set()) {
 			return;
+		}
 #endif //_DEBUG
 
 		// image correction
@@ -161,3 +162,4 @@ public:
 
 // cldms
 #endif //_CLDMS_H
+
