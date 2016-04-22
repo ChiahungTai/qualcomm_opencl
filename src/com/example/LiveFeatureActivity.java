@@ -16,7 +16,7 @@ import android.widget.FrameLayout;
 public class LiveFeatureActivity extends Activity {
 
 	static {
-        System.loadLibrary("JNIProcessor");
+        System.loadLibrary("ocl_videoproc");
     }
 
     private final String TAG="LiveFeature";

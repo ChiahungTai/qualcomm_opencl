@@ -16,7 +16,7 @@ import android.view.SurfaceView;
 
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback, Camera.PreviewCallback {
     static {
-        System.loadLibrary("JNIProcessor");
+        System.loadLibrary("ocl_videoproc");
     }
 
 	private static final String TAG = "CameraPreview";
