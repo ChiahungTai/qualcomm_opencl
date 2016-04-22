@@ -321,9 +321,11 @@ public:
 
 			//save("cap.dat", (char *)p, size);
 			m_trip = true;
+#if(0)
 			ClImage image(m_width, m_height);
 			image.store("cap.png", (unsigned char *)p, m_save_bits, m_bbp);
 			image.close();
+#endif
 		}
 		PERF_END("imageSave");
 	};

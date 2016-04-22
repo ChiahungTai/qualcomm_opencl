@@ -106,7 +106,7 @@ public:
 	void write(int index, const void *istr) {
 		if(!is_open()) {
 			return;
-		
+		}	
 		ClBuffer *buffer = mapBuffer[index];
 		if(buffer->is_buffer() == false) {
 			return;
