@@ -16,15 +16,15 @@ import android.widget.FrameLayout;
 public class LiveFeatureActivity extends Activity {
 
 	static {
-        System.loadLibrary("ocl_videoproc");
-    }
+		System.loadLibrary("ocl_videoproc");
+	}
 
-    private final String TAG="LiveFeature";
+	private final String TAG="LiveFeature";
 	private CameraPreview mPreview;
 
 	native private boolean compileKernels();
 
-    private void copyFile(final String f) {
+	private void copyFile(final String f) {
 		InputStream in;
 		try {
 			in = getAssets().open(f);
@@ -45,46 +45,46 @@ public class LiveFeatureActivity extends Activity {
 	}
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_live_feature);
-        copyFile("kernels.cl");
+		protected void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			setContentView(R.layout.activity_live_feature);
+			copyFile("kernels.cl");
 
-        if( compileKernels() == false )
-            Log.i(TAG,"Kernel compilation failed");
+			if( compileKernels() == false )
+				Log.i(TAG,"Kernel compilation failed");
 
-        mPreview = new CameraPreview(this);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.live_feature, menu);
-		return true;
-	}
+			mPreview = new CameraPreview(this);
+			FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+			preview.addView(mPreview);
+		}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	        case R.id.iFeed:
-	        	mPreview.setProcessedPreview(0);
-	            return true;
-            case R.id.eFeed:
-                mPreview.setProcessedPreview(1);
-                return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
-	}
+		public boolean onCreateOptionsMenu(Menu menu) {
+			getMenuInflater().inflate(R.menu.live_feature, menu);
+			return true;
+		}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-	}
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch (item.getItemId()) {
+				case R.id.iFeed:
+					mPreview.setProcessedPreview(0);
+					return true;
+				case R.id.eFeed:
+					mPreview.setProcessedPreview(1);
+					return true;
+				default:
+					return super.onOptionsItemSelected(item);
+			}
+		}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-	}
+		protected void onPause() {
+			super.onPause();
+		}
+
+	@Override
+		protected void onResume() {
+			super.onResume();
+		}
 }
