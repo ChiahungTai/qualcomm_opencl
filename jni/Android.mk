@@ -8,14 +8,15 @@ include $(CLEAR_VARS)
 LOCAL_C_INCLUDES := $(ADRENO_SDK)/Development/Inc/
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/
 #LOCAL_CPPFLAGS += -I$(ADRENO_SDK)/Development/Inc
-LOCAL_CFLAGS := -DUSE_GPU -c -g -O0  -W  -std=c++11 -D_QUALCOMM
+LOCAL_CFLAGS := -DUSE_GPU -c -g -O0  -W  -std=c++11 -D_QUALCOMM -D_DEBUG -D_WITH_IMAGEDESC -fexceptions
 #LOCAL_LDLIBS := -llog -landroid $(LOCAL_PATH)/libs/libOpenCL.so
-LOCAL_LDLIBS := -llog -landroid -lOpenCL
+LOCAL_LDLIBS := -llog -landroid -lOpenCL -ljnigraphics
 LOCAL_MODULE := ocl_videoproc
-LOCAL_SRC_FILES := ocl_videoproc.cpp
+LOCAL_SRC_FILES := processor.cpp
+LOCAL_SRC_FILES += ocl_videoproc.cpp
 LOCAL_SHARED_LIBRARIES += libcutils libOpenCL
-#include $(PREBUILT_SHARED_LIBRARY)
-include $(BUILD_EXECUTABLE)
+include $(BUILD_SHARED_LIBRARY)
+#include $(BUILD_EXECUTABLE)
 
 
 #ifeq ($(ARCH),x86_64)

@@ -57,7 +57,7 @@ public:
 		}
 	}
 };
-
+/*
 PERF_INIT("./ocl_videoproc.csv");
 
 int main(int argc, char **argv) 
@@ -81,4 +81,4 @@ int main(int argc, char **argv)
 
 	free(dev);
 }
-
+*/
