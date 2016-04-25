@@ -57,7 +57,8 @@ public:
 		}
 	}
 };
-/*
+
+#ifdef _WITH_STANDALONE_ANDROID
 PERF_INIT("./ocl_videoproc.csv");
 
 int main(int argc, char **argv) 
@@ -81,4 +82,4 @@ int main(int argc, char **argv)
 
 	free(dev);
 }
-*/
+#endif //_WITH_STANDALONE_ANDROID
