@@ -22,6 +22,8 @@
 #include <sys/mman.h>
 #include <mutex>
 
+#include <android/log.h>
+
 #ifdef __APPLE__
 #include <OpenCL/opencl.h>
 #else
@@ -29,9 +31,12 @@
 #endif
 
 #define MAX_SOURCE_SIZE (0x100000)
+#define APPNAME "OCL_VIDEOPROC"
 
 #ifdef _DEBUG
-#define TRACE(format, ...) fprintf(stdout, "trace[%s](%s:%d) " format, __FUNCTION__, __FILE__, __LINE__, ## __VA_ARGS__ )
+//#define TRACE(format, ...) fprintf(stdout, "trace[%s](%s:%d) " format, __FUNCTION__, __FILE__, __LINE__, ## __VA_ARGS__ )
+#define TRACE(format, ...) \
+	__android_log_print(ANDROID_LOG_VERBOSE, APPNAME, "trace[%s](%s:%d) " format, __FUNCTION__, __FILE__, __LINE__, ## __VA_ARGS__ );
 #else
 #define TRACE(format, ...) // no output
 #endif //_DEBUG
